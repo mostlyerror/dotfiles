@@ -1,22 +1,68 @@
+" colorscheme synthwave84
 map ; :
 
+" syntax highlighting
+syntax on               
+filetype on
+filetype indent on
+filetype plugin indent on
+
+" show line numbers
+set number          
+
+" show line and column number
+set ruler                         
+
+set encoding=utf-8
+
+" show (partial) command in status line
+set showcmd             
+
+set splitbelow
+set splitright
+
+" Enable folding
+set foldmethod=indent
+set foldlevel=99
+
+" Enable folding with the spacebar
+nnoremap <space> za
+
+" move between panes with arrow keys
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" change bg color of highlighted search terms
+set hlsearch
+" hi Search ctermbg=LightYellow
+" hi Search ctermfg=DarkCyan
+
+
+autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
+autocmd FileType eruby setlocal expandtab shiftwidth=2 tabstop=2
+" " run ruby code using leader-r only when inside a .rb file
+" au BufRead, *.rb nmap <leader>r :!ruby %<cr>
+
+
 call plug#begin('~/.vim/plugged')
+Plug 'mileszs/ack.vim'
 Plug 'ctrlpvim/ctrlp.vim'
 Plug 'junegunn/vim-easy-align'
 Plug 'preservim/nerdtree'
 Plug 'preservim/nerdcommenter'
-" Plug 'elixir-editors/vim-elixir'
 Plug 'tmhedberg/SimpylFold'
-" Plug 'vim-scripts/indentpython.vim'
-" Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-surround'
 Plug 'artanikin/vim-synthwave84'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
 call plug#end()
 
-let g:SimpylFold_docstring_preview=1
+" let g:SimpylFold_docstring_preview=1
 
-
-filetype plugin on
+" NERDTree
+map <C-n> :NERDTreeToggle<CR>
 
 " NerdCommenter
 "
@@ -42,11 +88,10 @@ let g:NERDDefaultAlign = 'left'
 let g:NERDCommentEmptyLines = 1
 
 " Enable trimming of trailing whitespace when uncommenting
-" let g:NERDTrimTrailingWhitespace = 1
+let g:NERDTrimTrailingWhitespace = 1
 
 " Enable NERDCommenterToggle to check all selected lines is commented or not
 " let g:NERDToggleCheckAllLines = 1
-
 
 
 " CtrlP
@@ -54,69 +99,34 @@ let g:ctrlp_map = '<c-p>'
 let g:ctrlp_cmd = 'CtrlP'
 let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-" NERDTree
-map <C-n> :NERDTreeToggle<CR>
 
-set splitbelow
-set splitright
-
-
-" Enable folding
-set foldmethod=indent
-set foldlevel=99
-" Enable folding with the spacebar
-nnoremap <space> za
+" FZF
+set rtp+=/usr/local/opt/fzf
+nnoremap <silent> <C-z> :FZF<CR>
 
 
+" ack.vim --- {{{
 
-" move between panes with arrow keys
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
+" Use ripgrep for searching ⚡️
+" Options include:
+" --vimgrep -> Needed to parse the rg response properly for ack.vim
+" --type-not sql -> Avoid huge sql file dumps as it slows down the search
+" --smart-case -> Search case insensitive if all lowercase pattern, Search case sensitively otherwise
+let g:ackprg = 'rg --vimgrep --type-not sql --smart-case'
 
-" change bg color of highlighted search terms
-set hlsearch
-hi Search ctermbg=LightYellow
-hi Search ctermfg=DarkCyan
+" Auto close the Quickfix list after pressing '<enter>' on a list item
+let g:ack_autoclose = 1
 
+" Any empty ack search will search for the work the cursor is on
+let g:ack_use_cword_for_empty_search = 1
 
+" Don't jump to first match
+cnoreabbrev Ack Ack!
 
-" configure expanding of tabs for various file types
-au BufRead,BufNewFile *.c set noexpandtab
-au BufRead,BufNewFile *.h set noexpandtab
-au BufRead,BufNewFile Makefile* set noexpandtab
-" 
-" au BufNewFile,BufRead *.py, *.rb
-"     \ set tabstop=4
-"     \ set softtabstop=4
-"     \ set shiftwidth=4
-"     \ set textwidth=79
-"     \ set expandtab
-"     \ set autoindent
-"     \ set fileformat=unix
+" Maps <leader>/ so we're ready to type the search keyword
+nnoremap <Leader>/ :Ack!<Space>
+" }}}
 
-let python_highlight_all=1
-
-
-" au BufNewFile,BufRead *.js, *.html, *.css
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
-
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-
-set encoding=utf-8
-set number                          " show line numbers
-set ruler                           " show line and column number
-
-
-syntax on               " syntax highlighting
-set showcmd             " show (partial) command in status line
-
-
-" colorscheme synthwave84
-"
-" " run ruby code using leader-r only when inside a .rb file
-au BufRead, *.rb nmap <leader>r :!ruby %<cr>
-
+" Navigate quickfix list with ease
+nnoremap <silent> [q :cprevious<CR>
+nnoremap <silent> ]q :cnext<CR>
