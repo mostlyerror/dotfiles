@@ -103,15 +103,15 @@ source $ZSH/oh-my-zsh.sh
 source /Users/benjaminpoon/.zsh/aliases.zsh
 
 # elixir
-export PATH="$PATH:/usr/local/bin/elixir"
+# export PATH="$PATH:/usr/local/bin/elixir"
 
-export PATH="/Users/benjaminpoon/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# export PATH="/Users/benjaminpoon/.pyenv/bin:$PATH"
+# eval "$(pyenv init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # tabtab source for packages
 # uninstall by removing these lines
-[[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
+# [[ -f ~/.config/tabtab/__tabtab.zsh ]] && . ~/.config/tabtab/__tabtab.zsh || true
 
 
 # building pythons...
@@ -122,12 +122,12 @@ eval "$(pyenv virtualenv-init -)"
 # export LDFLAGS="-L$(brew --prefix openssl)/lib -L$(brew --prefix readline)/lib -L$(brew --prefix zlib)/lib -L$(brew --prefix bzip2)/lib"
   
 # virtualenv and virtualenvwrapper
-export WORKON_HOME=$HOME/.virtualenvs
-export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
-source /usr/local/bin/virtualenvwrapper.sh
+# export WORKON_HOME=$HOME/.virtualenvs
+# export VIRTUALENVWRAPPER_PYTHON=/usr/local/bin/python3
+# source /usr/local/bin/virtualenvwrapper.sh
 
 # add ~/bin to path
-export PATH=$PATH:~/bin
+# export PATH=$PATH:~/bin
 
 # NVM
 export NVM_DIR="$HOME/.nvm"
@@ -138,3 +138,10 @@ export NVM_DIR="$HOME/.nvm"
 # Note: this may interfere with building old versions of Ruby (e.g <2.4) that use OpenSSL <1.1.
 # export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 # export PATH="/usr/local/opt/openssl@1.1/bin:$PATH"
+
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
+
+export PATH="/usr/local/opt/postgresql@11/bin:$PATH"
+export LDFLAGS="-L/usr/local/opt/postgresql@11/lib"
+export CPPFLAGS="-I/usr/local/opt/postgresql@11/include"

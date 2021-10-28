@@ -11,6 +11,7 @@ Plug 'tmhedberg/SimpylFold'
 " Plug 'nvie/vim-flake8'
 Plug 'tpope/vim-surround'
 Plug 'artanikin/vim-synthwave84'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 let g:SimpylFold_docstring_preview=1
@@ -98,25 +99,28 @@ au BufRead,BufNewFile Makefile* set noexpandtab
 
 let python_highlight_all=1
 
-
 " au BufNewFile,BufRead *.js, *.html, *.css
-"     \ set tabstop=2
-"     \ set softtabstop=2
-"     \ set shiftwidth=2
+" set tabstop=2
+" set softtabstop=2
+" set shiftwidth=2
 
-" au BufRead,BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+autocmd FileType html setlocal ts=2 sts=2 sw=2
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2
+autocmd FileType javascript setlocal ts=2 sts=2 sw=2
+
+au BufNewFile,BufRead *.py
+  \ set tabstop=4
+  \ set softtabstop=4
+  \ set shiftwidth=4
+  \ set textwidth=79
 
 set encoding=utf-8
 set number                          " show line numbers
 set ruler                           " show line and column number
 
-
 syntax on               " syntax highlighting
 set showcmd             " show (partial) command in status line
 
-
 " colorscheme synthwave84
-"
 " " run ruby code using leader-r only when inside a .rb file
 au BufRead, *.rb nmap <leader>r :!ruby %<cr>
-
