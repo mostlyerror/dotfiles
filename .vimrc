@@ -57,6 +57,7 @@ Plug 'tpope/vim-surround'
 Plug 'artanikin/vim-synthwave84'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
 call plug#end()
 
 " let g:SimpylFold_docstring_preview=1
@@ -145,3 +146,13 @@ function! InsertTabWrapper()
 endfunction
 inoremap <expr> <tab> InsertTabWrapper()
 inoremap <s-tab> <c-n>
+
+" RSpec.vim mappings
+map <Leader>t :call RunCurrentSpecFile()<CR>
+map <Leader>s :call RunNearestSpec()<CR>
+map <Leader>l :call RunLastSpec()<CR>
+map <Leader>a :call RunAllSpecs()<CR>
+
+" overwrite test runner command
+let g:rspec_command = "!rspec -f d {spec}"
+
