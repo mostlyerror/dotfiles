@@ -1,4 +1,3 @@
-" colorscheme synthwave84
 map ; :
 
 " syntax highlighting
@@ -36,29 +35,16 @@ map <C-l> <C-W>l
 
 " change bg color of highlighted search terms
 set hlsearch
-" hi Search ctermbg=LightYellow
-" hi Search ctermfg=DarkCyan
+hi Search ctermbg=LightYellow
+hi Search ctermfg=DarkCyan
 
 
+autocmd FileType javascript setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType ruby setlocal expandtab shiftwidth=2 tabstop=2
 autocmd FileType eruby setlocal expandtab shiftwidth=2 tabstop=2
 " " run ruby code using leader-r only when inside a .rb file
 " au BufRead, *.rb nmap <leader>r :!ruby %<cr>
 
-
-call plug#begin('~/.vim/plugged')
-Plug 'mileszs/ack.vim'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'junegunn/vim-easy-align'
-Plug 'preservim/nerdtree'
-Plug 'preservim/nerdcommenter'
-Plug 'tmhedberg/SimpylFold'
-Plug 'tpope/vim-surround'
-Plug 'artanikin/vim-synthwave84'
-Plug 'vim-ruby/vim-ruby'
-Plug 'tpope/vim-rails'
-Plug 'thoughtbot/vim-rspec'
-call plug#end()
 
 " let g:SimpylFold_docstring_preview=1
 
@@ -107,7 +93,6 @@ nnoremap <silent> <C-z> :FZF<CR>
 
 
 " ack.vim --- {{{
-
 " Use ripgrep for searching ⚡️
 " Options include:
 " --vimgrep -> Needed to parse the rg response properly for ack.vim
@@ -156,3 +141,23 @@ map <Leader>a :call RunAllSpecs()<CR>
 " overwrite test runner command
 let g:rspec_command = "!rspec -f d {spec}"
 
+call plug#begin('~/.vim/plugged')
+Plug 'mileszs/ack.vim'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/vim-easy-align'
+Plug 'preservim/nerdtree'
+Plug 'preservim/nerdcommenter'
+Plug 'tmhedberg/SimpylFold'
+Plug 'tpope/vim-surround'
+Plug 'vim-ruby/vim-ruby'
+Plug 'tpope/vim-rails'
+Plug 'thoughtbot/vim-rspec'
+Plug 'brooth/far.vim'
+"Plug 'artanikin/vim-synthwave84'
+call plug#end()
+
+execute pathogen#infect()
+
+" store swapfiles in ~/.vim/tmp
+" note: this directory needs to be created, like in ~/.zshrc
+set directory^=$HOME/.vim/tmp//
